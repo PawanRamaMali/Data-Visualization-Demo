@@ -5,15 +5,26 @@
 ###################
 server <- function(input, output, session) {
   
-  histPlot_df <- eventReactive(
-    input$submit,
-    {
-      df[[ input$columnChoice ]]
-    })
+  data_r <- reactiveValues(data = drinks, name = "drinks")
   
-  output$histPlot <- renderPlot({
-    data <- histPlot_df()[ seq_len(input$slider) ]
-    hist(data)
+  observeEvent(input$data, {
+    if (input$data == "drinks") {
+      data_r$data <- drinks
+      data_r$name <- "drinks"
+    } else {
+      data_r$data <- mpg
+      data_r$name <- "mpg"
+    }
+  })
+  
+  result <- callModule(
+    module = esquisserServer,
+    id = "esquisse",
+    data = data_r
+  )
+  
+  output$module_out <- renderPrint({
+    str(reactiveValuesToList(result))
   })
   
 }

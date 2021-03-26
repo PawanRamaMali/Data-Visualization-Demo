@@ -14,29 +14,24 @@ body <- dashboardBody(
     tabItem(
       tabName = "dashboard",
       fluidRow(
+        mainPanel(
+          tabsetPanel(
+            tabPanel(
+              title = "Build Plots",
+              esquisserUI(
+                id = "esquisse",
+                header = FALSE, # dont display gadget title
+                choose_data = FALSE # dont display button to change data
+              )
+            ),
+            tabPanel(
+              title = "output",
+              verbatimTextOutput("module_out")
+            )
+          )
+        )
         
-        # CONTROLS
-        box(
-          
-          title = "Controls",
-          
-          # Choose a column
-          selectInput(
-            "columnChoice",
-            "Choose a column:",
-            choices = colnames(df),
-            selected = "n"),
-          
-          sliderInput("slider", "Number of observations:", 1, 100, 50),
-          
-          # Create an eventReactive element
-          actionButton(
-            inputId = "submit",
-            label = "Submit column")
-          
-        ),
-        # PLOT THE THTINGS
-        box( plotOutput("histPlot") )
+        
       )
     ),
     

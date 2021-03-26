@@ -1,11 +1,10 @@
 # LIBRARIES ----
-
+library(promises)
 library(esquisse)
 library(modeldata)
 library(shiny)
 
-data("drinks")
-data("mpg")
+
 
 ui <- fluidPage(
 

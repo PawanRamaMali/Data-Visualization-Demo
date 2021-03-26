@@ -1,9 +1,16 @@
 ###################
 # global.R
 # 
-# Anything you want shared between your ui and server, define here.
 ###################
 
+# LIBRARIES ----
+library(promises)
+library(esquisse)
+library(modeldata)
+library(shiny)
+
+data("drinks")
+data("mpg")
 
 set.seed(122)
 df <- data.frame(

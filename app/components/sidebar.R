@@ -6,8 +6,19 @@
 sidebar <- dashboardSidebar(
   sidebarMenu(
 
+
     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-    menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+    #menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+    
+    
+ 
+      radioButtons(
+        inputId = "data",
+        label = "Data to use:",
+        choices = c("drinks", "mpg"),
+        inline = TRUE
+      )
+    
     
   )
 )
