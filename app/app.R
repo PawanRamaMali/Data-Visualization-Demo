@@ -1,8 +1,9 @@
-###################
-# app.R
+## app.R #################
 # 
-# Main controller. 
-# Used to import your ui and server components; initializes the app.
+# 
+# Main controller. ----
+# Used to import your ui and server components; 
+# initializes the app.
 ###################
 
 args <- commandArgs( trailingOnly = TRUE ) # read arguments

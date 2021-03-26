@@ -1,96 +1,105 @@
-# body.R ##################  
-# 
-# 
+# body.R ##################
+#
+#
 
-body <- dashboardBody(
-  tabItems(
+body <- dashboardBody(tabItems(
+  ### 1st tab content #####################
+  #  Dashboard ----
+  
+  tabItem(tabName = "dashboard",
+          
+          h3("Dashboard Home")
+          # tabsetPanel(
+          # 
+          #   # tabPanel(title = "output",
+          #   #          verbatimTextOutput("module_out"))
+          #   
+          #   
+          #   
+          # )
+          ),
+  
+  ### 2nd  tab content #####################
+  # Data Selection ----
+  
+  tabItem(
+    tabName = "Tab_Data_Selection",
     
-    ### 1st tab content #####################
-    #  Dashboard ----
-
-    tabItem(
-      tabName = "dashboard",
-
-          tabsetPanel(
-            tabPanel(
-              title = "Build Plots",
-              esquisserUI(
-                id = "esquisse",
-                header = FALSE, # dont display gadget title
-                choose_data = FALSE # dont display button to change data
-              )
-            ),
-            tabPanel(
-              title = "output",
-              verbatimTextOutput("module_out")
-            )
-
-        
-        
+    div(
+      h3("Explore a Dataset"),
+      
+      shiny::selectInput(
+        inputId = "dataset_choice",
+        label   = "Data Connection",
+        choices = c("StackOverflow",
+                    "Car Prices",
+                    "Sacramento Housing",
+                    "Drinks")
       )
     ),
     
-    ### 2nd  tab content #####################
-    # Data Selection ---- 
+    hr(),
     
-    tabItem(
-      tabName = "Tab_Data_Selection",
-        
-      div( 
-        h3("Explore a Dataset"),
-        
-        shiny::selectInput(
-          inputId = "dataset_choice",
-          label   = "Data Connection",
-          choices = c("StackOverflow",
-                      "Car Prices",
-                      "Sacramento Housing",
-                      "Drinks")
-        )),
-        
-        hr(),
-        
-        # Moved to settings Panel
-        # checkboxInput("show_rownames",
-        #               label = "Show row numbers"),
-        # checkboxInput("show_features_responsive",
-
-        br(),
-        br(),
-      
-        dataTableOutput("show_data")
-        
-   
-    ),
+    # Moved to settings Panel
+    # checkboxInput("show_rownames",
+    #               label = "Show row numbers"),
+    # checkboxInput("show_features_responsive",
     
-    ### 3rd  tab content #####################
-    # Correlation ---- 
+    br(),
+    br(),
     
-    tabItem(
-      tabName = "Tab_Correlation_Matrix",
-      h3("Correlation Matrix"),
-      
-        plotlyOutput("corrplot", height = 700)
-        
-    
-    ),
+    dataTableOutput("show_data")
     
     
-    ########################
-    # 4th tab content
-    ########################
-    tabItem(
-      tabName = "Tab_Settings",
-      h3("Settings"),
-        h4("DataTable Options"),
-        hr(),
-        checkboxInput("show_rownames",
-                      label = "Show row numbers"),
-        checkboxInput("show_features_responsive",
-                      label = "Responsive Layout")
-        
-       , 
-      shinythemes::themeSelector()
+  ),
+  
+  ### 3rd  tab content #####################
+  # Visualize ----
+  
+  tabItem(
+    tabName = "Tab_Visualize",
+    h3(" Visualize Data"),
+    
+    esquisserUI(
+      id = "esquisse",
+      header = FALSE,
+      # dont display gadget title
+      choose_data = TRUE 
+      # dont display button to change data
     )
+    
+    
+  ),
+  
+  
+  
+  ### 4th tab content #####################
+  # Correlation ----
+  
+  tabItem(
+    tabName = "Tab_Correlation_Matrix",
+    h3("Correlation Matrix"),
+    
+    plotlyOutput("corrplot", height = 700)
+    
+    
+  ),
+  
+  
+  ### 5th tab content #####################
+  # Settings  ----
+  
+  tabItem(
+    tabName = "Tab_Settings",
+    h3("Settings"),
+    h4("DataTable Options"),
+    hr(),
+    checkboxInput("show_rownames",
+                  label = "Show row numbers"),
+    checkboxInput("show_features_responsive",
+                  label = "Responsive Layout")
+    
+    # ,
+    # shinythemes::themeSelector()
   )
-)
+))

@@ -5,33 +5,15 @@
 ###################
 server <- function(input, output, session) {
   
-  data_r <- reactiveValues(data = drinks, name = "drinks")
-  
-  observeEvent(input$data, {
-    if (input$data == "drinks") {
-      data_r$data <- drinks
-      data_r$name <- "drinks"
-    } else {
-      data_r$data <- mpg
-      data_r$name <- "mpg"
-    }
-  })
-  
-  result <- callModule(
-    module = esquisserServer,
-    id = "esquisse",
-    data = data_r
-  )
-  
-  output$module_out <- renderPrint({
-    str(reactiveValuesToList(result))
-  })
-  
+
   # Main Server ----
   
   rv <- reactiveValues()
   
   observe({
+    
+    
+    # Settings ---- 
     
     if(input$show_features_responsive){
       features <-  c("Responsive")
@@ -49,12 +31,39 @@ server <- function(input, output, session) {
     
   })
   
+  # data_r <- reactiveValues(data = drinks, name = "drinks")
+  # 
+  # observeEvent(input$data, {
+  #   if (input$data == "drinks") {
+  #     data_r$data <- drinks
+  #     data_r$name <- "drinks"
+  #   } else {
+  #     data_r$data <- mpg
+  #     data_r$name <- "mpg"
+  #   }
+  # })
+  
+  result <- callModule(
+    module = esquisserServer,
+    id = "esquisse",
+    data = rv$data_set <- data_list %>% pluck(input$dataset_choice)
+  )
+  
+  output$module_out <- renderPrint({
+    str(reactiveValuesToList(result))
+  })
+  
+  
+  
+  # Correlation Plot ----
+  
   output$corrplot <- renderPlotly({
     
     g <- DataExplorer::plot_correlation(rv$data_set)
     
     plotly::ggplotly(g)
   })
+  
   
   
   
