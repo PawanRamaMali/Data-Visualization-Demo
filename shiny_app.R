@@ -1,5 +1,4 @@
 # LIBRARIES ----
-library(promises)
 library(esquisse)
 library(modeldata)
 library(shiny)
