@@ -46,7 +46,8 @@ server <- function(input, output, session) {
   result <- callModule(
     module = esquisserServer,
     id = "esquisse",
-    data = rv$data_set <- data_list %>% pluck(input$dataset_choice)
+    data = rv$data_set 
+ 
   )
   
   output$module_out <- renderPrint({

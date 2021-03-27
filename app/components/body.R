@@ -64,8 +64,9 @@ body <- dashboardBody(tabItems(
       id = "esquisse",
       header = FALSE,
       # dont display gadget title
-      choose_data = TRUE 
+      choose_data = TRUE ,
       # dont display button to change data
+      container = esquisseContainer(height = "700px")
     )
     
     

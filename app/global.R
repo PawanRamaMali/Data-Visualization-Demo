@@ -27,6 +27,11 @@ library(tidyverse)
 library(DT)
 
 
+rm(list=ls())
+## Setting Upload Size to 1GB
+options(shiny.maxRequestSize = 1000000000)
+options("esquisse.display.mode" = "browser")
+
 # LOAD DATASETS ----
 utils::data("stackoverflow",
             "car_prices",
